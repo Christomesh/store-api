@@ -5,6 +5,7 @@ const express = require("express")
 app = express()
 
 const connectDB = require("./db/connect")
+const productRouter = require("./routes/product")
 
 const notFoundMiddleware = require("./middlewares/notfound")
 const errorMiddleware = require("./middlewares/error-handler")
@@ -18,6 +19,11 @@ app.get("/", (req, res)=>{
     res.send("<h1>Store API</h1><a href='/api/v1/products'>products route</a>")
 })
 
+// products route
+app.use("/api/v1/products", productRouter)
+
+
+// using our custom middleware
 app.use(notFoundMiddleware)
 app.use(errorMiddleware)
 
